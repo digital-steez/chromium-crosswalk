@@ -90,15 +90,17 @@ void LazyInitIcuDataFile() {
 //put icudtl.dat in other folders like res/raw instead of assets.Reading
 //from assets has a risk of conflict with android system webview.
 //See https://crosswalk-project.org/jira/browse/XWALK-7004
-//#if defined(OS_ANDROID)
-//  int fd = base::android::OpenApkAsset(kAndroidAssetsIcuDataFileName,
-//                                       &g_icudtl_region);
-//  g_icudtl_pf = fd;
-//  if (fd != -1) {
-//    return;
-//  }
-//// For unit tests, data file is located on disk, so try there as a fallback.
+#if 0
+#if defined(OS_ANDROID)
+  int fd = base::android::OpenApkAsset(kAndroidAssetsIcuDataFileName,
+                                       &g_icudtl_region);
+  g_icudtl_pf = fd;
+  if (fd != -1) {
+    return;
+  }
+// For unit tests, data file is located on disk, so try there as a fallback.
 //#endif  // defined(OS_ANDROID)
+#endif
 #if !defined(OS_MACOSX)
   FilePath data_path;
 #if defined(OS_WIN)
